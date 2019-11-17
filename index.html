@@ -1,0 +1,129 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>screensaver</title>
+    <style>
+      html {
+        font-size: 1vw;
+      }
+      body {
+        margin: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: #000000;
+        color: #ffffff;
+        overflow: hidden;
+      }
+      .images {
+        display: flex;
+        position: relative;
+      }
+      .images__item {
+        height: 60rem;
+        width: 60rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 3rem 5rem 3rem 0;
+        position: absolute;
+        transition: left 0.5s linear;
+      }
+
+      .images__item__link {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: 100%;
+      }
+
+      .images__item__src {
+        height: auto;
+        max-height: 60rem;
+        max-width: 60rem;
+        width: auto;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="button button--exit">Quit</div>
+    <div id="images" class="images"></div>
+  </body>
+  <script>
+    function createImageHtml({ link, alt }) {
+      return `
+    <a class="images__item__link" href="${link}">
+      <img class="images__item__src" src="${link}" alt="${alt}"></img>
+    </a>
+  `;
+    }
+
+    function createImage({ link, alt }) {
+      const newNode = document.createElement("div");
+      newNode.classList.add("images__item");
+      newNode.innerHTML = createImageHtml({ link, alt });
+      return newNode;
+    }
+
+    function addNewImage(item, container) {
+      const newNode = createImage(item);
+      item.ref = newNode;
+      container.appendChild(newNode);
+    }
+
+    function translateLeft(ref, index, left) {
+      ref.style.left = `${(index + left) * 70}rem`;
+    }
+
+    function removeFirstImage() {
+      const removeItem = images.shift();
+      removeItem.ref.remove();
+    }
+
+    const images = [
+      {
+        link: "src/dan-smedley-FLQeze-RKWU-unsplash.jpg",
+        alt: "autumn and mirror",
+        left: 0
+      },
+      {
+        link: "src/nong-vang-8fcqlEJzWP4-unsplash.jpg",
+        alt: "medieval hideout",
+        left: 0
+      },
+      {
+        link: "src/perry-kibler-wUjn6UsYzqw-unsplash.jpg",
+        alt: "furniture, tabletop, coffee",
+        left: 0
+      },
+      {
+        link: "src/sydney-angove-Qe-yvVDYx0k-unsplash.jpg",
+        alt: "Moraine Lake in Baniff",
+        left: 0
+      }
+    ];
+
+    const container = document.getElementById("images");
+    images.forEach(item => {
+      addNewImage(item, container);
+    });
+
+    const interval = setInterval(() => {
+      images.forEach((item, index) => {
+        translateLeft(item.ref, index, item.left);
+        item.left--;
+        if (item.left + index < -2) {
+          removeFirstImage();
+          addNewImage(images[0], container);
+        }
+      });
+    }, 1000);
+    const timeout = setTimeout(() => {
+      clearInterval(interval);
+      clearTimeout(timeout);
+    }, 5000);
+  </script>
+</html>
