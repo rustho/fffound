@@ -1,0 +1,43 @@
+html {
+  font-size: 1vw;
+}
+body {
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000000;
+  color: #ffffff;
+  overflow: hidden;
+}
+.images {
+  display: flex;
+  position: relative;
+}
+.images__item {
+  height: 40rem;
+  width: 40rem;
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 5rem 3rem 0;
+  position: absolute;
+  transition: left 32s linear;
+  background-color: red;
+}
+
+.images__item__link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.images__item__src {
+  height: auto;
+  max-height: 40rem;
+  max-width: 40rem;
+  width: auto;
+  overflow: hidden;
+}
