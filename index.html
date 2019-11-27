@@ -21,14 +21,16 @@
         position: relative;
       }
       .images__item {
-        height: 60rem;
-        width: 60rem;
+        height: 40rem;
+        width: 40rem;
+        padding: 5rem;
         display: flex;
         justify-content: center;
         align-items: center;
         margin: 3rem 5rem 3rem 0;
         position: absolute;
         transition: left 0.5s linear;
+        background-color: red;
       }
 
       .images__item__link {
@@ -41,8 +43,8 @@
 
       .images__item__src {
         height: auto;
-        max-height: 60rem;
-        max-width: 60rem;
+        max-height: 40rem;
+        max-width: 40rem;
         width: auto;
         overflow: hidden;
       }
@@ -55,10 +57,10 @@
   <script>
     function createImageHtml({ link, alt }) {
       return `
-    <a class="images__item__link" href="${link}">
-      <img class="images__item__src" src="${link}" alt="${alt}"></img>
-    </a>
-  `;
+        <a class="images__item__link" href="${link}">
+          <img class="images__item__src" src="${link}" alt="${alt}"></img>
+        </a>
+      `;
     }
 
     function createImage({ link, alt }) {
@@ -103,6 +105,16 @@
         link: "src/sydney-angove-Qe-yvVDYx0k-unsplash.jpg",
         alt: "Moraine Lake in Baniff",
         left: 0
+      },
+      {
+        link: "src/perry-kibler-wUjn6UsYzqw-unsplash.jpg",
+        alt: "furniture, tabletop, coffee",
+        left: 0
+      },
+      {
+        link: "src/sydney-angove-Qe-yvVDYx0k-unsplash.jpg",
+        alt: "Moraine Lake in Baniff",
+        left: 0
       }
     ];
 
@@ -115,15 +127,16 @@
       images.forEach((item, index) => {
         translateLeft(item.ref, index, item.left);
         item.left--;
-        if (item.left + index < -2) {
-          removeFirstImage();
-          addNewImage(images[0], container);
-        }
+        // Придумать механизм удаления и добавления фоточки
+        // if (item.left + index < -2) {
+        //   removeFirstImage();
+        //   addNewImage(images[0], container);
+        // }
       });
     }, 1000);
     const timeout = setTimeout(() => {
       clearInterval(interval);
       clearTimeout(timeout);
-    }, 5000);
+    }, 9000);
   </script>
 </html>
